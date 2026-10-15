@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "@fontsource-variable/inter";
 import "@fontsource-variable/manrope";
-import SiteHeader from "@/components/layout/site-header";
-import QueryProvider from "@/components/providers/query-provider";
+import Header from "@/components/Header/Header";
+import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -17,10 +17,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
       <body>
-        <QueryProvider>
-          <SiteHeader />
+        <TanStackProvider>
+          <Header />
           <main>{children}</main>
-        </QueryProvider>
+        </TanStackProvider>
       </body>
     </html>
   );
