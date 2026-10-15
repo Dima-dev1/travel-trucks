@@ -1,1 +1,43 @@
 @import "tailwindcss";
+
+:root {
+  --main: #101828;
+  --text: #475467;
+  --white: #fff;
+  --inputs: #f7f7f7;
+  --badges: #f2f4f7;
+  --gray: #6c717b;
+  --gray-light: #dadde1;
+  --button: #e44848;
+  --button-hover: #d84343;
+  --rating: #ffc531;
+  --grey-green: #829b91;
+  --olive: #f0f1f1;
+  --green-hover: #6d7b75;
+  --font-family: "Inter Variable", sans-serif;
+  --second-family: "Manrope Variable", sans-serif;
+}
+
+@theme inline {
+  --color-main: var(--main);
+  --color-text: var(--text);
+  --color-inputs: var(--inputs);
+  --color-badges: var(--badges);
+  --color-gray: var(--gray);
+  --color-gray-light: var(--gray-light);
+  --color-button: var(--button);
+  --color-button-hover: var(--button-hover);
+  --color-rating: var(--rating);
+  --color-grey-green: var(--grey-green);
+  --color-olive: var(--olive);
+  --color-green-hover: var(--green-hover);
+  --font-sans: var(--font-family);
+  --font-second: var(--second-family);
+}
+
+body {
+  min-height: 100vh;
+  background: var(--white);
+  color: var(--main);
+  font-family: var(--font-family);
+}
