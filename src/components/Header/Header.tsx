@@ -1,11 +1,8 @@
-"use client";
-
+import { Suspense } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import HeaderNavigation from "./HeaderNavigation";
 
 export default function Header() {
-  const pathname = usePathname();
-
   return (
     <header className="h-[72px] border-b border-gray-light bg-inputs">
       <div className="relative mx-auto flex h-full w-full max-w-[1440px] items-center px-8 lg:px-16">
@@ -16,33 +13,30 @@ export default function Header() {
         >
           TravelTrucks
         </Link>
-        <nav
-          aria-label="Main navigation"
-          className="absolute left-1/2 flex -translate-x-1/2 items-center gap-8"
-        >
-          {[
-            { href: "/", label: "Home" },
-            { href: "/catalog", label: "Catalog" },
-          ].map(({ href, label }) => {
-            const isActive =
-              pathname === href ||
-              (href === "/catalog" && pathname.startsWith("/catalog/"));
-
-            return (
+        <Suspense
+          fallback={
+            <nav
+              aria-label="Main navigation"
+              className="absolute left-1/2 flex -translate-x-1/2 items-center gap-8"
+            >
               <Link
-                key={href}
-                href={href}
-                prefetch={href !== "/catalog"}
-                aria-current={isActive ? "page" : undefined}
-                className={`text-base font-medium transition-colors hover:text-grey-green ${
-                  isActive ? "text-grey-green" : "text-main"
-                }`}
+                className="text-base font-medium text-main"
+                href="/"
               >
-                {label}
+                Home
               </Link>
-            );
-          })}
-        </nav>
+              <Link
+                className="text-base font-medium text-main"
+                href="/catalog"
+                prefetch={false}
+              >
+                Catalog
+              </Link>
+            </nav>
+          }
+        >
+          <HeaderNavigation />
+        </Suspense>
       </div>
     </header>
   );
