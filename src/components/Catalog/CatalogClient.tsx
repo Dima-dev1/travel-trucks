@@ -1,0 +1,48 @@
+"use client";
+
+import { useState } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { getCampers } from "@/lib/api";
+import type { CamperSearchParams } from "@/types/camper";
+import CamperList from "./CamperList";
+import FilterPanel from "./FilterPanel";
+
+export type AppliedFilters = Pick<
+  CamperSearchParams,
+  "location" | "form" | "engine" | "transmission"
+>;
+
+const PAGE_SIZE = 4;
+
+export default function CatalogClient() {
+  const [filters, setFilters] = useState<AppliedFilters>({});
+  const [resetKey, setResetKey] = useState(0);
+
+  const campersQuery = useInfiniteQuery({
+    queryKey: ["campers", filters],
+    queryFn: ({ pageParam, signal }) =>
+      getCampers(
+        { page: pageParam, perPage: PAGE_SIZE, ...filters },
+        signal,
+      ),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) =>
+      lastPage.page < lastPage.totalPages ? lastPage.page + 1 : undefined,
+  });
+
+  const clearFilters = () => {
+    setFilters({});
+    setResetKey((key) => key + 1);
+  };
+
+  return (
+    <div className="mx-auto flex w-full max-w-[1440px] items-start gap-16 px-16 py-14 max-xl:gap-10 max-xl:px-10 max-lg:flex-col max-lg:px-6">
+      <FilterPanel
+        key={resetKey}
+        onSearch={setFilters}
+        onClear={clearFilters}
+      />
+      <CamperList query={campersQuery} onClearFilters={clearFilters} />
+    </div>
+  );
+}
