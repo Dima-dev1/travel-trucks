@@ -2,13 +2,21 @@
 
 import { useMutation } from "@tanstack/react-query";
 import { Formik, type FormikErrors } from "formik";
+import { FiAlertCircle } from "react-icons/fi";
 import { toast } from "sonner";
 import { z } from "zod";
 import { createBookingRequest } from "@/lib/api";
 
 const bookingSchema = z.object({
-  name: z.string().trim().min(2, "Please enter your name."),
-  email: z.string().trim().email("Please enter a valid email."),
+  name: z
+    .string()
+    .trim()
+    .min(2, "Please enter your full name.")
+    .regex(
+      /^[\p{L}]+(?:[ '\u2019-][\p{L}]+)*$/u,
+      "Please enter your full name using letters only.",
+    ),
+  email: z.string().trim().email("Please enter a valid email address."),
 });
 
 type BookingValues = z.infer<typeof bookingSchema>;
@@ -86,24 +94,32 @@ export default function BookingForm({ camperId }: { camperId: string }) {
             <label className="sr-only" htmlFor="booking-name">
               Name
             </label>
-            <input
-              autoComplete="name"
-              aria-describedby={
-                touched.name && errors.name ? "name-error" : undefined
-              }
-              aria-invalid={touched.name && Boolean(errors.name)}
-              className={`h-12 rounded-xl border bg-(--inputs) px-4 text-sm text-(--main) outline-none placeholder:text-(--gray) focus:border-(--grey-green) ${
-                touched.name && errors.name
-                  ? "border-(--button)"
-                  : "border-transparent"
-              }`}
-              id="booking-name"
-              name="name"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              placeholder="Name*"
-              value={values.name}
-            />
+            <div className="relative">
+              <input
+                autoComplete="name"
+                aria-describedby={
+                  touched.name && errors.name ? "name-error" : undefined
+                }
+                aria-invalid={touched.name && Boolean(errors.name)}
+                className={`h-12 w-full rounded-xl border px-4 pr-12 text-sm text-(--main) outline-none placeholder:text-(--gray) focus:border-(--grey-green) ${
+                  touched.name && errors.name
+                    ? "border-(--button) bg-[#ffe2e2]"
+                    : "border-transparent bg-(--inputs)"
+                }`}
+                id="booking-name"
+                name="name"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                placeholder="Name*"
+                value={values.name}
+              />
+              {touched.name && errors.name && (
+                <FiAlertCircle
+                  aria-hidden="true"
+                  className="absolute top-1/2 right-4 -translate-y-1/2 text-xl text-(--button)"
+                />
+              )}
+            </div>
             {touched.name && errors.name && (
               <p
                 className="text-sm text-(--button)"
@@ -117,25 +133,33 @@ export default function BookingForm({ camperId }: { camperId: string }) {
             <label className="sr-only" htmlFor="booking-email">
               Email
             </label>
-            <input
-              autoComplete="email"
-              aria-describedby={
-                touched.email && errors.email ? "email-error" : undefined
-              }
-              aria-invalid={touched.email && Boolean(errors.email)}
-              className={`h-12 rounded-xl border bg-(--inputs) px-4 text-sm text-(--main) outline-none placeholder:text-(--gray) focus:border-(--grey-green) ${
-                touched.email && errors.email
-                  ? "border-(--button)"
-                  : "border-transparent"
-              }`}
-              id="booking-email"
-              name="email"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              placeholder="Email*"
-              type="email"
-              value={values.email}
-            />
+            <div className="relative">
+              <input
+                autoComplete="email"
+                aria-describedby={
+                  touched.email && errors.email ? "email-error" : undefined
+                }
+                aria-invalid={touched.email && Boolean(errors.email)}
+                className={`h-12 w-full rounded-xl border px-4 pr-12 text-sm text-(--main) outline-none placeholder:text-(--gray) focus:border-(--grey-green) ${
+                  touched.email && errors.email
+                    ? "border-(--button) bg-[#ffe2e2]"
+                    : "border-transparent bg-(--inputs)"
+                }`}
+                id="booking-email"
+                name="email"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                placeholder="Email*"
+                type="email"
+                value={values.email}
+              />
+              {touched.email && errors.email && (
+                <FiAlertCircle
+                  aria-hidden="true"
+                  className="absolute top-1/2 right-4 -translate-y-1/2 text-xl text-(--button)"
+                />
+              )}
+            </div>
             {touched.email && errors.email && (
               <p
                 className="text-sm text-(--button)"

@@ -11,7 +11,7 @@ export default function Hero() {
         priority
         decoding="sync"
         sizes="100vw"
-        className="object-cover object-[50%_70%] [transform:scaleX(-1.23)_scaleY(1.23)]"
+        className="object-cover object-[50%_70%] [transform:scaleX(1.23)_scaleY(1.23)]"
       />
       <div
         aria-hidden="true"
