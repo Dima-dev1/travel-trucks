@@ -57,7 +57,7 @@ export default function CamperList({
           alt=""
           className="h-auto w-56"
           height={314}
-          src="/images/no-campers-found.png"
+          src="/images/not-found.png"
           width={314}
         />
         <h1 className="text-2xl font-semibold text-(--main)">
