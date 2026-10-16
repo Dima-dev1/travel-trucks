@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import HeaderNavigation from "./HeaderNavigation";
 
@@ -8,10 +9,16 @@ export default function Header() {
       <div className="relative mx-auto flex h-full w-full max-w-[1440px] items-center px-8 lg:px-16">
         <Link
           href="/"
-          className="text-base font-bold tracking-tight text-main"
+          className="inline-flex items-center"
           aria-label="TravelTrucks home"
         >
-          TravelTrucks
+          <Image
+            alt="TravelTrucks"
+            height={16}
+            priority
+            src="/images/logo.png"
+            width={136}
+          />
         </Link>
         <Suspense
           fallback={
