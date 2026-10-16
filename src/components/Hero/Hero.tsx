@@ -3,12 +3,13 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative isolate mx-auto h-[768px] w-full max-w-[1440px] overflow-hidden bg-main text-white">
+    <section className="relative isolate h-[calc(100svh-72px)] w-full overflow-hidden bg-main text-white">
       <Image
-        src="/images/home-hero.jpg"
+        src="/images/home-hero.png"
         alt="Camper van parked beside a lake at sunset"
         fill
         priority
+        decoding="sync"
         sizes="100vw"
         className="object-cover object-[50%_70%] [transform:scaleX(-1.23)_scaleY(1.23)]"
       />
