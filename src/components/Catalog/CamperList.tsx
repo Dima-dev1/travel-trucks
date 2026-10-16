@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { FiX } from "react-icons/fi";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import type { CamperListResponse } from "@/types/camper";
 import CamperCard from "./CamperCard";
@@ -17,13 +18,14 @@ export default function CamperList({
     return (
       <section
         aria-label="Camper search results"
-        className="flex min-h-96 flex-1 items-center justify-center"
+        className="flex min-h-96 flex-1 flex-col items-center justify-center gap-3"
       >
         <div
           aria-label="Loading campers"
           className="size-10 animate-spin rounded-full border-4 border-(--gray-light) border-t-(--grey-green)"
           role="status"
         />
+        <p className="text-sm text-(--text)">Loading campers...</p>
       </section>
     );
   }
@@ -52,28 +54,41 @@ export default function CamperList({
 
   if (campers.length === 0) {
     return (
-      <section className="flex min-h-96 flex-1 flex-col items-center justify-center gap-4 py-10 text-center">
+      <section
+        aria-label="Camper search results"
+        className="flex min-h-[598px] flex-1 flex-col items-center justify-center gap-4 rounded-2xl bg-(--inputs) px-8 py-10 text-center"
+      >
         <Image
           alt=""
-          className="h-auto w-56"
-          height={314}
+          className="h-auto w-[314px] max-w-full"
+          height={926}
           src="/images/not-found.png"
-          width={314}
+          width={976}
         />
         <h1 className="text-2xl font-semibold text-(--main)">
           No campers found
         </h1>
         <p className="max-w-md text-(--text)">
-          Try changing your search criteria or clear the filters to see all
-          available campers.
+          We couldn&apos;t find any campers that match your filters. Try
+          adjusting your search or clearing some filters.
         </p>
-        <button
-          className="rounded-full bg-(--grey-green) px-8 py-4 font-medium text-white transition hover:bg-(--green-hover)"
-          onClick={onClearFilters}
-          type="button"
-        >
-          Clear filters
-        </button>
+        <div className="mt-3 flex flex-wrap justify-center gap-3">
+          <button
+            className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-(--gray-light) bg-white px-7 text-sm font-medium text-(--main) transition hover:border-(--grey-green)"
+            onClick={onClearFilters}
+            type="button"
+          >
+            <FiX aria-hidden="true" />
+            Clear filters
+          </button>
+          <button
+            className="inline-flex min-h-10 items-center justify-center rounded-full bg-(--grey-green) px-7 text-sm font-medium text-white transition hover:bg-(--green-hover)"
+            onClick={onClearFilters}
+            type="button"
+          >
+            View all campers
+          </button>
+        </div>
       </section>
     );
   }
@@ -110,7 +125,18 @@ export default function CamperList({
             onClick={() => void query.fetchNextPage()}
             type="button"
           >
-            {query.isFetchingNextPage ? "Loading..." : "Load more"}
+            {query.isFetchingNextPage ? (
+              <span className="inline-flex items-center gap-2">
+                <span
+                  aria-label="Loading campers"
+                  className="size-4 animate-spin rounded-full border-2 border-(--gray-light) border-t-(--grey-green)"
+                  role="status"
+                />
+                Loading campers...
+              </span>
+            ) : (
+              "Load more"
+            )}
           </button>
         </div>
       )}
