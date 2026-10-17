@@ -1,9 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
+import { ButtonLink } from "@/components/ui/Button/Button";
 
 export default function Hero() {
   return (
-    <section className="relative isolate h-[calc(100svh-72px)] w-full overflow-hidden bg-(--main) text-white">
+    <section className="relative isolate h-[calc(100svh-72px)] w-full overflow-hidden bg-main text-white">
       <Image
         src="/images/home-hero.png"
         alt="Camper van parked beside a lake at sunset"
@@ -17,21 +17,21 @@ export default function Hero() {
         aria-hidden="true"
         className="absolute inset-0 bg-linear-to-r from-black/50 via-black/25 to-black/10"
       />
-      <div className="relative z-10 mx-auto flex h-full w-full max-w-[1440px] items-center px-8 lg:px-16">
-        <div className="max-w-[720px]">
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-page items-center px-8 lg:px-16">
+        <div className="max-w-180">
           <h1 className="whitespace-nowrap text-5xl leading-[1.15] font-semibold tracking-tight">
             Campers of your dreams
           </h1>
           <p className="mt-2 text-2xl leading-[1.33] font-semibold text-white">
             You can find everything you want in our catalog
           </p>
-          <Link
+          <ButtonLink
+            className="mt-9 w-[173px] px-15 tracking-[-0.01em] whitespace-nowrap focus-visible:outline-white"
             href="/catalog"
-            prefetch={false}
-            className="mt-9 inline-flex h-14 w-[173px] items-center justify-center rounded-[200px] bg-grey-green px-[60px] py-4 text-base leading-6 font-medium tracking-[-0.01em] whitespace-nowrap text-white transition-colors hover:bg-green-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            size="lg"
           >
             View Now
-          </Link>
+          </ButtonLink>
         </div>
       </div>
     </section>

@@ -35,7 +35,7 @@ export default function CatalogClient() {
   return (
     <>
       <h1 className="sr-only">Camper catalog</h1>
-      <div className="mx-auto flex w-full max-w-[1440px] items-start gap-16 px-16 py-14 max-xl:gap-10 max-xl:px-10 max-lg:flex-col max-lg:px-6">
+      <div className="mx-auto flex w-full max-w-page items-start gap-16 px-16 py-14 max-xl:gap-10 max-xl:px-10 max-lg:flex-col max-lg:px-6">
         <FilterPanel
           draftFilters={draftFilters}
           onDraftFiltersChange={setDraftFilters}
