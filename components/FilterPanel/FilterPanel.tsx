@@ -2,7 +2,7 @@
 
 import { type Dispatch, type FormEvent, type SetStateAction } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { FiMapPin, FiX } from "react-icons/fi";
+import { BsMap, BsXLg } from "react-icons/bs";
 import { getCamperFilters } from "@/lib/api";
 import { formatCamperForm } from "@/lib/formatters";
 import type { CamperFilters } from "@/types/camper";
@@ -96,7 +96,7 @@ export default function FilterPanel({
         <label className="flex flex-col gap-1 text-sm font-medium text-text">
           Location
           <span className="relative block">
-            <FiMapPin
+            <BsMap
               aria-hidden="true"
               className="absolute left-4 top-1/2 -translate-y-1/2 text-xl text-main"
             />
@@ -188,7 +188,7 @@ export default function FilterPanel({
             type="button"
             variant="outline"
           >
-            <FiX aria-hidden="true" />
+            <BsXLg aria-hidden="true" />
             Clear filters
           </Button>
         </div>

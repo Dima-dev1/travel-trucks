@@ -1,4 +1,4 @@
-import { FiStar } from "react-icons/fi";
+import { BsStarFill } from "react-icons/bs";
 
 export default function StarRating({
   className = "",
@@ -20,12 +20,12 @@ export default function StarRating({
 
         return (
           <span className="relative inline-flex" key={index}>
-            <FiStar aria-hidden="true" className="size-4 text-gray-light" />
+            <BsStarFill aria-hidden="true" className="size-4 text-gray-light" />
             <span
               className="absolute inset-y-0 left-0 overflow-hidden"
               style={{ width: `${fillPercentage}%` }}
             >
-              <FiStar
+              <BsStarFill
                 aria-hidden="true"
                 className="size-4 max-w-none fill-rating text-rating"
               />
