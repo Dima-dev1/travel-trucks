@@ -6,6 +6,7 @@ import { FiAlertCircle } from "react-icons/fi";
 import toast from "react-hot-toast";
 import * as Yup from "yup";
 import { createBookingRequest } from "@/services/api";
+import { Button } from "@/components/ui/Button/Button";
 
 const bookingSchema = Yup.object({
   name: Yup.string()
@@ -52,11 +53,11 @@ export default function BookingForm({ camperId }: { camperId: string }) {
   };
 
   return (
-    <section className="rounded-2xl border border-(--gray-light) p-7">
-      <h2 className="text-lg font-semibold text-(--main)">
+    <section className="rounded-2xl border border-gray-light p-7">
+      <h2 className="text-lg font-semibold text-main">
         Book your campervan now
       </h2>
-      <p className="mt-2 text-sm text-(--text)">
+      <p className="mt-2 text-sm text-text">
         Stay connected! We&apos;re always ready to help you.
       </p>
       <Formik
@@ -88,10 +89,10 @@ export default function BookingForm({ camperId }: { camperId: string }) {
                   touched.name && errors.name ? "name-error" : undefined
                 }
                 aria-invalid={touched.name && Boolean(errors.name)}
-                className={`h-12 w-full rounded-xl border px-4 pr-12 text-sm text-(--main) outline-none placeholder:text-(--gray) focus:border-(--grey-green) ${
+                className={`h-12 w-full rounded-xl border px-4 pr-12 text-sm text-main outline-none placeholder:text-gray focus:border-grey-green ${
                   touched.name && errors.name
-                    ? "border-(--button) bg-[#ffe2e2]"
-                    : "border-transparent bg-(--inputs)"
+                    ? "border-button bg-error-bg"
+                    : "border-transparent bg-inputs"
                 }`}
                 id="booking-name"
                 name="name"
@@ -103,16 +104,12 @@ export default function BookingForm({ camperId }: { camperId: string }) {
               {touched.name && errors.name && (
                 <FiAlertCircle
                   aria-hidden="true"
-                  className="absolute top-1/2 right-4 -translate-y-1/2 text-xl text-(--button)"
+                  className="absolute top-1/2 right-4 -translate-y-1/2 text-xl text-button"
                 />
               )}
             </div>
             {touched.name && errors.name && (
-              <p
-                className="text-sm text-(--button)"
-                id="name-error"
-                role="alert"
-              >
+              <p className="text-sm text-button" id="name-error" role="alert">
                 {errors.name}
               </p>
             )}
@@ -127,10 +124,10 @@ export default function BookingForm({ camperId }: { camperId: string }) {
                   touched.email && errors.email ? "email-error" : undefined
                 }
                 aria-invalid={touched.email && Boolean(errors.email)}
-                className={`h-12 w-full rounded-xl border px-4 pr-12 text-sm text-(--main) outline-none placeholder:text-(--gray) focus:border-(--grey-green) ${
+                className={`h-12 w-full rounded-xl border px-4 pr-12 text-sm text-main outline-none placeholder:text-gray focus:border-grey-green ${
                   touched.email && errors.email
-                    ? "border-(--button) bg-[#ffe2e2]"
-                    : "border-transparent bg-(--inputs)"
+                    ? "border-button bg-error-bg"
+                    : "border-transparent bg-inputs"
                 }`}
                 id="booking-email"
                 name="email"
@@ -143,27 +140,24 @@ export default function BookingForm({ camperId }: { camperId: string }) {
               {touched.email && errors.email && (
                 <FiAlertCircle
                   aria-hidden="true"
-                  className="absolute top-1/2 right-4 -translate-y-1/2 text-xl text-(--button)"
+                  className="absolute top-1/2 right-4 -translate-y-1/2 text-xl text-button"
                 />
               )}
             </div>
             {touched.email && errors.email && (
-              <p
-                className="text-sm text-(--button)"
-                id="email-error"
-                role="alert"
-              >
+              <p className="text-sm text-button" id="email-error" role="alert">
                 {errors.email}
               </p>
             )}
 
-            <button
-              className="mt-1 h-12 rounded-full bg-(--grey-green) px-6 text-base font-medium text-white transition hover:bg-(--green-hover) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--grey-green) disabled:cursor-wait disabled:opacity-60"
+            <Button
+              className="mt-1"
               disabled={isSubmitting || bookingMutation.isPending}
+              size="md"
               type="submit"
             >
               {isSubmitting ? "Sending..." : "Send"}
-            </button>
+            </Button>
           </form>
         )}
       </Formik>

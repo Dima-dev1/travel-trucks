@@ -72,7 +72,7 @@ export default async function CamperPage({ params }: CamperPageProps) {
   const reviewsFailed = reviewsResult.status === "rejected";
 
   return (
-    <div className="mx-auto w-full max-w-[1440px] px-16 py-12 max-xl:px-10 max-md:px-6">
+    <div className="mx-auto w-full max-w-page px-16 py-12 max-xl:px-10 max-md:px-6">
       <div className="grid grid-cols-2 items-start gap-5 max-lg:grid-cols-1">
         <CamperGallery
           name={camperResult.value.name}

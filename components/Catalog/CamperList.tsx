@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FiX } from "react-icons/fi";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import type { CamperListResponse } from "@/types/camper";
+import { Button } from "@/components/ui/Button/Button";
 import CamperCard from "./CamperCard";
 import type { InfiniteData } from "@tanstack/react-query";
 
@@ -24,10 +25,10 @@ export default function CamperList({
       >
         <div
           aria-label="Loading campers"
-          className="size-10 animate-spin rounded-full border-4 border-(--gray-light) border-t-(--grey-green)"
+          className="size-10 animate-spin rounded-full border-4 border-gray-light border-t-grey-green"
           role="status"
         />
-        <p className="text-sm text-(--text)">Loading campers...</p>
+        <p className="text-sm text-text">Loading campers...</p>
       </section>
     );
   }
@@ -38,16 +39,17 @@ export default function CamperList({
         aria-label="Camper search results"
         className="flex min-h-96 flex-1 flex-col items-center justify-center gap-4 text-center"
       >
-        <p className="text-lg text-(--text)">
+        <p className="text-lg text-text">
           We couldn&apos;t load campers. Please try again.
         </p>
-        <button
-          className="rounded-full bg-(--grey-green) px-8 py-4 font-medium text-white transition hover:bg-(--green-hover)"
+        <Button
+          className="px-8"
           onClick={() => void query.refetch()}
+          size="lg"
           type="button"
         >
           Try again
-        </button>
+        </Button>
       </section>
     );
   }
@@ -59,7 +61,7 @@ export default function CamperList({
       <section
         aria-label="Camper search results"
         aria-busy={isPlaceholderData}
-        className="relative flex min-h-[598px] flex-1 rounded-2xl bg-(--inputs)"
+        className="relative flex min-h-[598px] flex-1 rounded-2xl bg-inputs"
       >
         <div
           className={`flex flex-1 flex-col items-center justify-center gap-4 px-8 py-10 text-center ${
@@ -73,29 +75,30 @@ export default function CamperList({
             src="/images/not-found.png"
             width={976}
           />
-          <h2 className="text-2xl font-semibold text-(--main)">
-            No campers found
-          </h2>
-          <p className="max-w-md text-(--text)">
+          <h2 className="text-2xl font-semibold text-main">No campers found</h2>
+          <p className="max-w-md text-text">
             We couldn&apos;t find any campers that match your filters. Try
             adjusting your search or clearing some filters.
           </p>
           <div className="mt-3 flex flex-wrap justify-center gap-3">
-            <button
-              className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-(--gray-light) bg-white px-7 text-sm font-medium text-(--main) transition hover:border-(--grey-green)"
+            <Button
+              className="px-7"
               onClick={onClearFilters}
+              size="sm"
               type="button"
+              variant="outline"
             >
               <FiX aria-hidden="true" />
               Clear filters
-            </button>
-            <button
-              className="inline-flex min-h-10 items-center justify-center rounded-full bg-(--grey-green) px-7 text-sm font-medium text-white transition hover:bg-(--green-hover)"
+            </Button>
+            <Button
+              className="px-7"
               onClick={onClearFilters}
+              size="sm"
               type="button"
             >
               View all campers
-            </button>
+            </Button>
           </div>
         </div>
         {isPlaceholderData && <PlaceholderSpinner />}
@@ -121,33 +124,37 @@ export default function CamperList({
 
       {query.isFetchNextPageError && !isPlaceholderData && (
         <div
-          className="mt-6 flex items-center justify-between gap-4 rounded-xl bg-(--olive) p-4 text-sm text-(--text)"
+          className="mt-6 flex items-center justify-between gap-4 rounded-xl bg-olive p-4 text-sm text-text"
           role="alert"
         >
           <p>Could not load more campers.</p>
-          <button
-            className="font-medium text-(--main) underline"
+          <Button
+            className="h-auto border-transparent bg-transparent px-0 text-main underline hover:border-transparent hover:bg-transparent"
             onClick={() => void query.fetchNextPage()}
+            size="sm"
             type="button"
+            variant="outline"
           >
             Try again
-          </button>
+          </Button>
         </div>
       )}
 
       {query.hasNextPage && (
         <div className="flex justify-center pt-10">
-          <button
-            className="min-h-14 min-w-36 rounded-full border border-(--gray-light) px-8 text-base font-medium text-(--main) transition hover:border-(--grey-green) hover:bg-(--olive) disabled:cursor-wait disabled:opacity-60"
+          <Button
+            className="min-w-36"
             disabled={query.isFetchingNextPage || isPlaceholderData}
             onClick={() => void query.fetchNextPage()}
+            size="lg"
             type="button"
+            variant="outline"
           >
             {query.isFetchingNextPage ? (
               <span className="inline-flex items-center gap-2">
                 <span
                   aria-label="Loading campers"
-                  className="size-4 animate-spin rounded-full border-2 border-(--gray-light) border-t-(--grey-green)"
+                  className="size-4 animate-spin rounded-full border-2 border-gray-light border-t-grey-green"
                   role="status"
                 />
                 Loading campers...
@@ -155,11 +162,11 @@ export default function CamperList({
             ) : (
               "Load more"
             )}
-          </button>
+          </Button>
         </div>
       )}
       {!query.hasNextPage && !isPlaceholderData && (
-        <p className="pt-10 text-center text-sm text-(--gray)">
+        <p className="pt-10 text-center text-sm text-gray">
           You&apos;ve reached the end of the list.
         </p>
       )}
@@ -176,7 +183,7 @@ function PlaceholderSpinner() {
     >
       <span
         aria-hidden="true"
-        className="block size-5 animate-spin rounded-full border-2 border-(--gray-light) border-t-(--grey-green)"
+        className="block size-5 animate-spin rounded-full border-2 border-gray-light border-t-grey-green"
       />
     </div>
   );
