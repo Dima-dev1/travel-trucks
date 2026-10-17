@@ -17,7 +17,9 @@ export default function CamperGallery({
   name: string;
   gallery: CamperImage[];
 }) {
-  const images = [...gallery].sort((first, second) => first.order - second.order);
+  const images = [...gallery].sort(
+    (first, second) => first.order - second.order,
+  );
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
 
   if (images.length === 0) {
@@ -37,8 +39,7 @@ export default function CamperGallery({
         loop={images.length > 1}
         modules={[A11y, Keyboard, Thumbs]}
         thumbs={{
-          swiper:
-            thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+          swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}
       >
         {images.map((image, index) => (

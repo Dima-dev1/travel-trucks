@@ -65,9 +65,9 @@ export default function CamperList({
           src="/images/not-found.png"
           width={976}
         />
-        <h1 className="text-2xl font-semibold text-(--main)">
+        <h2 className="text-2xl font-semibold text-(--main)">
           No campers found
-        </h1>
+        </h2>
         <p className="max-w-md text-(--text)">
           We couldn&apos;t find any campers that match your filters. Try
           adjusting your search or clearing some filters.
