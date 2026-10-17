@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative isolate h-[calc(100svh-72px)] w-full overflow-hidden bg-main text-white">
+    <section className="relative isolate h-[calc(100svh-72px)] w-full overflow-hidden bg-(--main) text-white">
       <Image
         src="/images/home-hero.png"
         alt="Camper van parked beside a lake at sunset"
@@ -11,13 +11,13 @@ export default function Hero() {
         priority
         decoding="sync"
         sizes="100vw"
-        className="object-cover object-[50%_70%] [transform:scaleX(1.23)_scaleY(1.23)]"
+        className="object-cover object-[50%_70%]"
       />
       <div
         aria-hidden="true"
         className="absolute inset-0 bg-linear-to-r from-black/50 via-black/25 to-black/10"
       />
-      <div className="relative z-10 mx-auto h-full w-full max-w-[1440px] px-8 pt-[184px] lg:px-16">
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-[1440px] items-center px-8 lg:px-16">
         <div className="max-w-[720px]">
           <h1 className="whitespace-nowrap text-5xl leading-[1.15] font-semibold tracking-tight">
             Campers of your dreams

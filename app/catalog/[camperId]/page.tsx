@@ -6,7 +6,7 @@ import CamperDescription from "@/components/CamperDetails/CamperDescription";
 import CamperGallery from "@/components/CamperDetails/CamperGallery";
 import CamperReviews from "@/components/CamperDetails/CamperReviews";
 import BookingForm from "@/components/CamperDetails/BookingForm";
-import { getCamperById, getCamperReviews } from "@/lib/api";
+import { getCamperById, getCamperReviews } from "@/services/api";
 
 type CamperPageProps = {
   params: Promise<{ camperId: string }>;

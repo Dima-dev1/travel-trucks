@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { type Dispatch, type FormEvent, type SetStateAction } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FiMapPin, FiX } from "react-icons/fi";
-import { getCamperFilters } from "@/lib/api";
+import { formatCamperForm } from "@/lib/formatters";
+import { getCamperFilters } from "@/services/api";
 import type { CamperFilters } from "@/types/camper";
 import type { AppliedFilters } from "./CatalogClient";
 
@@ -12,17 +13,11 @@ type FilterField = "form" | "engine" | "transmission";
 const filterGroups: {
   key: FilterField;
   title: string;
-  labels: Record<string, string>;
+  labels?: Record<string, string>;
 }[] = [
   {
     key: "form",
     title: "Camper form",
-    labels: {
-      panel_van: "Panel Van",
-      alcove: "Alcove",
-      integrated: "Integrated",
-      semi_integrated: "Semi-Integrated",
-    },
   },
   {
     key: "engine",
@@ -48,14 +43,16 @@ const filterOptions = (filters?: CamperFilters) => ({
 });
 
 export default function FilterPanel({
+  draftFilters,
+  onDraftFiltersChange,
   onSearch,
   onClear,
 }: {
+  draftFilters: AppliedFilters;
+  onDraftFiltersChange: Dispatch<SetStateAction<AppliedFilters>>;
   onSearch: (filters: AppliedFilters) => void;
   onClear: () => void;
 }) {
-  const [location, setLocation] = useState("");
-  const [selected, setSelected] = useState<AppliedFilters>({});
   const filtersQuery = useQuery({
     queryKey: ["camper-filters"],
     queryFn: ({ signal }) => getCamperFilters(signal),
@@ -65,21 +62,19 @@ export default function FilterPanel({
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const nextFilters: AppliedFilters = {};
-    const normalizedLocation = location.trim();
+    const normalizedLocation = draftFilters.location?.trim();
 
     if (normalizedLocation) nextFilters.location = normalizedLocation;
-    if (selected.form) nextFilters.form = selected.form;
-    if (selected.engine) nextFilters.engine = selected.engine;
-    if (selected.transmission) {
-      nextFilters.transmission = selected.transmission;
+    if (draftFilters.form) nextFilters.form = draftFilters.form;
+    if (draftFilters.engine) nextFilters.engine = draftFilters.engine;
+    if (draftFilters.transmission) {
+      nextFilters.transmission = draftFilters.transmission;
     }
 
     onSearch(nextFilters);
   };
 
   const handleClear = () => {
-    setLocation("");
-    setSelected({});
     onClear();
   };
 
@@ -87,7 +82,7 @@ export default function FilterPanel({
     key: K,
     value: NonNullable<AppliedFilters[K]>,
   ) => {
-    setSelected((current) => ({
+    onDraftFiltersChange((current) => ({
       ...current,
       [key]: current[key] === value ? undefined : value,
     }));
@@ -106,10 +101,15 @@ export default function FilterPanel({
             <input
               className="h-10 w-full rounded-xl border border-transparent bg-white pl-12 pr-4 text-sm text-(--main) outline-none transition placeholder:text-(--gray) focus:border-(--grey-green)"
               name="location"
-              onChange={(event) => setLocation(event.target.value)}
+              onChange={(event) =>
+                onDraftFiltersChange((current) => ({
+                  ...current,
+                  location: event.target.value,
+                }))
+              }
               placeholder="City"
               type="text"
-              value={location}
+              value={draftFilters.location ?? ""}
             />
           </span>
         </label>
@@ -157,14 +157,16 @@ export default function FilterPanel({
                         key={value}
                       >
                         <input
-                          checked={selected[key] === value}
+                          checked={draftFilters[key] === value}
                           className="size-4 accent-(--main)"
                           name={key}
                           onChange={() => handleSelection(key, value)}
                           type="radio"
                           value={value}
                         />
-                        {labels[value] ?? value.replaceAll("_", " ")}
+                        {key === "form"
+                          ? formatCamperForm(value)
+                          : (labels?.[value] ?? value.replaceAll("_", " "))}
                       </label>
                     ))}
                   </div>

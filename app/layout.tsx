@@ -3,7 +3,7 @@ import "@fontsource-variable/inter";
 import "@fontsource-variable/manrope";
 import Header from "@/components/Header/Header";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
-import { Toaster } from "sonner";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 export const metadata: Metadata = {

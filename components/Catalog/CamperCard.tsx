@@ -7,6 +7,7 @@ import {
   FiStar,
   FiTruck,
 } from "react-icons/fi";
+import { formatCamperForm } from "@/lib/formatters";
 import type { CamperListItem } from "@/types/camper";
 
 const featureLabel = (value: string) =>
@@ -26,7 +27,7 @@ export default function CamperCard({ camper }: { camper: CamperListItem }) {
   const features = [
     { icon: FiDroplet, label: camper.engine },
     { icon: FiSettings, label: camper.transmission },
-    { icon: FiTruck, label: camper.form.replaceAll("_", " ") },
+    { icon: FiTruck, label: formatCamperForm(camper.form) },
   ];
 
   return (
