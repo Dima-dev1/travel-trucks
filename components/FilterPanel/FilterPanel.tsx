@@ -3,11 +3,12 @@
 import { type Dispatch, type FormEvent, type SetStateAction } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FiMapPin, FiX } from "react-icons/fi";
+import { getCamperFilters } from "@/lib/api";
 import { formatCamperForm } from "@/lib/formatters";
-import { getCamperFilters } from "@/services/api";
 import type { CamperFilters } from "@/types/camper";
-import type { AppliedFilters } from "./CatalogClient";
+import type { AppliedFilters } from "@/components/CatalogClient/CatalogClient";
 import { Button } from "@/components/ui/Button/Button";
+import Loader from "@/components/Loader/Loader";
 
 type FilterField = "form" | "engine" | "transmission";
 
@@ -122,10 +123,7 @@ export default function FilterPanel({
               className="mb-4 flex items-center gap-2 text-sm text-gray"
               role="status"
             >
-              <span
-                aria-hidden="true"
-                className="size-4 animate-spin rounded-full border-2 border-gray-light border-t-grey-green"
-              />
+              <Loader size="sm" />
               Loading filters...
             </div>
           )}

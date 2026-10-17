@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
-import { getCampers } from "@/services/api";
+import { getCampers } from "@/lib/api";
 import type { CamperSearchParams } from "@/types/camper";
-import CamperList from "./CamperList";
-import FilterPanel from "./FilterPanel";
+import CamperList from "@/components/CamperList/CamperList";
+import FilterPanel from "@/components/FilterPanel/FilterPanel";
 
 export type AppliedFilters = Pick<
   CamperSearchParams,
