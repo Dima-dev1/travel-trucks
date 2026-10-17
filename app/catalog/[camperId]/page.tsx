@@ -2,11 +2,11 @@ import axios from "axios";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
-import CamperDescription from "@/components/CamperDetails/CamperDescription";
-import CamperGallery from "@/components/CamperDetails/CamperGallery";
-import CamperReviews from "@/components/CamperDetails/CamperReviews";
-import BookingForm from "@/components/CamperDetails/BookingForm";
-import { getCamperById, getCamperReviews } from "@/services/api";
+import CamperDescription from "@/components/CamperDescription/CamperDescription";
+import CamperGallery from "@/components/CamperGallery/CamperGallery";
+import CamperReviews from "@/components/CamperReviews/CamperReviews";
+import BookingForm from "@/components/BookingForm/BookingForm";
+import { getCamperById, getCamperReviews } from "@/lib/api";
 
 type CamperPageProps = {
   params: Promise<{ camperId: string }>;

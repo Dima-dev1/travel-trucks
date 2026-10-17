@@ -5,7 +5,7 @@ import { Formik } from "formik";
 import { FiAlertCircle } from "react-icons/fi";
 import toast from "react-hot-toast";
 import * as Yup from "yup";
-import { createBookingRequest } from "@/services/api";
+import { createBookingRequest } from "@/lib/api";
 import { Button } from "@/components/ui/Button/Button";
 
 const bookingSchema = Yup.object({

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import CatalogClient from "@/components/Catalog/CatalogClient";
+import CatalogClient from "@/components/CatalogClient/CatalogClient";
 
 export const metadata: Metadata = {
   title: "Camper Catalog",
