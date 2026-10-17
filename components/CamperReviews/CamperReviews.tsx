@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { FiStar } from "react-icons/fi";
+import StarRating from "@/components/StarRating/StarRating";
 import { Button } from "@/components/ui/Button/Button";
-import { getCamperReviews } from "@/services/api";
+import { getCamperReviews } from "@/lib/api";
 import type { CamperReview } from "@/types/camper";
 
 export default function CamperReviews({
@@ -73,23 +73,7 @@ export default function CamperReviews({
                   <p className="text-sm font-medium text-main">
                     {review.reviewer_name}
                   </p>
-                  <div
-                    aria-label={`${review.reviewer_rating} out of 5 stars`}
-                    className="mt-1 flex gap-1"
-                    role="img"
-                  >
-                    {Array.from({ length: 5 }, (_, index) => (
-                      <FiStar
-                        aria-hidden="true"
-                        className={
-                          index < review.reviewer_rating
-                            ? "fill-rating text-rating"
-                            : "text-gray-light"
-                        }
-                        key={index}
-                      />
-                    ))}
-                  </div>
+                  <StarRating className="mt-1" value={review.reviewer_rating} />
                 </div>
               </div>
               <p className="mt-4 text-sm leading-6 text-text">

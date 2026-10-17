@@ -1,4 +1,5 @@
-import { FiDroplet, FiMapPin, FiSettings, FiStar } from "react-icons/fi";
+import { FiDroplet, FiMapPin, FiSettings } from "react-icons/fi";
+import StarRating from "@/components/StarRating/StarRating";
 import type {
   Amenity,
   CamperDetails as CamperDetailsType,
@@ -56,7 +57,7 @@ export default function CamperDescription({
         <h1 className="text-2xl font-semibold text-main">{camper.name}</h1>
         <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-text">
           <span className="inline-flex items-center gap-1">
-            <FiStar aria-hidden="true" className="text-rating" />
+            <StarRating value={camper.rating} />
             {camper.rating.toFixed(1)} ({camper.totalReviews} Reviews)
           </span>
           <span className="inline-flex items-center gap-1">
