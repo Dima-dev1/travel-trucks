@@ -24,7 +24,7 @@ export default function CamperGallery({
 
   if (images.length === 0) {
     return (
-      <div className="flex aspect-[1.26] items-center justify-center rounded-2xl bg-(--inputs) text-(--text)">
+      <div className="flex aspect-[1.26] items-center justify-center rounded-2xl bg-inputs text-text">
         No photos available.
       </div>
     );

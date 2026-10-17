@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FiStar } from "react-icons/fi";
+import { Button } from "@/components/ui/Button/Button";
 import { getCamperReviews } from "@/services/api";
 import type { CamperReview } from "@/types/camper";
 
@@ -33,44 +34,43 @@ export default function CamperReviews({
 
   return (
     <section aria-labelledby="reviews-heading">
-      <h2
-        className="mb-5 text-xl font-semibold text-(--main)"
-        id="reviews-heading"
-      >
+      <h2 className="mb-5 text-xl font-semibold text-main" id="reviews-heading">
         Reviews
       </h2>
       {hasError ? (
         <div
-          className="rounded-2xl bg-(--inputs) p-6 text-sm text-(--text)"
+          className="rounded-2xl bg-inputs p-6 text-sm text-text"
           role="alert"
         >
           <p>Could not load reviews. Please try again.</p>
-          <button
-            className="mt-3 font-medium text-(--main) underline disabled:opacity-60"
+          <Button
+            className="mt-3 h-auto border-transparent bg-transparent px-0 text-main underline hover:border-transparent hover:bg-transparent"
             disabled={isLoading}
             onClick={() => void retry()}
+            size="sm"
             type="button"
+            variant="outline"
           >
             {isLoading ? "Loading reviews..." : "Try again"}
-          </button>
+          </Button>
         </div>
       ) : reviews.length === 0 ? (
-        <p className="rounded-2xl bg-(--inputs) p-6 text-sm text-(--text)">
+        <p className="rounded-2xl bg-inputs p-6 text-sm text-text">
           No reviews yet.
         </p>
       ) : (
         <ul className="flex flex-col gap-4">
           {reviews.map((review) => (
-            <li className="rounded-2xl bg-(--inputs) p-6" key={review.id}>
+            <li className="rounded-2xl bg-inputs p-6" key={review.id}>
               <div className="flex items-center gap-3">
                 <span
                   aria-hidden="true"
-                  className="flex size-10 items-center justify-center rounded-full bg-white text-base font-semibold text-(--grey-green)"
+                  className="flex size-10 items-center justify-center rounded-full bg-white text-base font-semibold text-grey-green"
                 >
                   {review.reviewer_name.charAt(0).toUpperCase()}
                 </span>
                 <div>
-                  <p className="text-sm font-medium text-(--main)">
+                  <p className="text-sm font-medium text-main">
                     {review.reviewer_name}
                   </p>
                   <div
@@ -83,8 +83,8 @@ export default function CamperReviews({
                         aria-hidden="true"
                         className={
                           index < review.reviewer_rating
-                            ? "fill-(--rating) text-(--rating)"
-                            : "text-(--gray-light)"
+                            ? "fill-rating text-rating"
+                            : "text-gray-light"
                         }
                         key={index}
                       />
@@ -92,7 +92,7 @@ export default function CamperReviews({
                   </div>
                 </div>
               </div>
-              <p className="mt-4 text-sm leading-6 text-(--text)">
+              <p className="mt-4 text-sm leading-6 text-text">
                 {review.comment}
               </p>
             </li>

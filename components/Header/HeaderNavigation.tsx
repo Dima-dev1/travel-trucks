@@ -23,10 +23,9 @@ export default function HeaderNavigation() {
           <Link
             key={href}
             href={href}
-            prefetch={href !== "/catalog"}
             aria-current={isActive ? "page" : undefined}
             className={`text-base font-medium transition-colors hover:text-grey-green ${
-              isActive ? "text-grey-green" : "text-(--main)"
+              isActive ? "text-grey-green" : "text-main"
             }`}
           >
             {label}
