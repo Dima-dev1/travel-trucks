@@ -7,6 +7,7 @@ import { formatCamperForm } from "@/lib/formatters";
 import { getCamperFilters } from "@/services/api";
 import type { CamperFilters } from "@/types/camper";
 import type { AppliedFilters } from "./CatalogClient";
+import { Button } from "@/components/ui/Button/Button";
 
 type FilterField = "form" | "engine" | "transmission";
 
@@ -89,17 +90,17 @@ export default function FilterPanel({
   };
 
   return (
-    <aside className="w-[384px] shrink-0 rounded-2xl bg-(--inputs) p-5 max-lg:w-full">
+    <aside className="w-96 shrink-0 rounded-2xl bg-inputs p-5 max-lg:w-full">
       <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-        <label className="flex flex-col gap-1 text-sm font-medium text-(--text)">
+        <label className="flex flex-col gap-1 text-sm font-medium text-text">
           Location
           <span className="relative block">
             <FiMapPin
               aria-hidden="true"
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-xl text-(--main)"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-xl text-main"
             />
             <input
-              className="h-10 w-full rounded-xl border border-transparent bg-white pl-12 pr-4 text-sm text-(--main) outline-none transition placeholder:text-(--gray) focus:border-(--grey-green)"
+              className="h-10 w-full rounded-xl border border-transparent bg-white pl-12 pr-4 text-sm text-main outline-none transition placeholder:text-gray focus:border-grey-green"
               name="location"
               onChange={(event) =>
                 onDraftFiltersChange((current) => ({
@@ -115,50 +116,52 @@ export default function FilterPanel({
         </label>
 
         <div>
-          <p className="mb-4 text-base font-medium text-(--text)">Filters</p>
+          <p className="mb-4 text-base font-medium text-text">Filters</p>
           {filtersQuery.isPending && (
             <div
-              className="mb-4 flex items-center gap-2 text-sm text-(--gray)"
+              className="mb-4 flex items-center gap-2 text-sm text-gray"
               role="status"
             >
               <span
                 aria-hidden="true"
-                className="size-4 animate-spin rounded-full border-2 border-(--gray-light) border-t-(--grey-green)"
+                className="size-4 animate-spin rounded-full border-2 border-gray-light border-t-grey-green"
               />
               Loading filters...
             </div>
           )}
           {filtersQuery.isError && (
             <div
-              className="mb-4 flex items-center gap-3 text-sm text-(--text)"
+              className="mb-4 flex items-center gap-3 text-sm text-text"
               role="alert"
             >
               <p>Could not load filter options.</p>
-              <button
-                className="font-medium text-(--grey-green) underline"
+              <Button
+                className="h-auto border-transparent bg-transparent px-0 text-grey-green underline hover:border-transparent hover:bg-transparent"
                 onClick={() => void filtersQuery.refetch()}
+                size="sm"
                 type="button"
+                variant="outline"
               >
                 Try again
-              </button>
+              </Button>
             </div>
           )}
           <div className="flex flex-col gap-4">
             {filterGroups.map(({ key, title, labels }) => (
               <fieldset className="border-0" key={key}>
-                <legend className="mb-1 text-sm font-medium text-(--text)">
+                <legend className="mb-1 text-sm font-medium text-text">
                   {title}
                 </legend>
                 {filtersQuery.isSuccess && (
                   <div className="flex flex-col">
                     {options[key].map((value) => (
                       <label
-                        className="flex min-h-5 cursor-pointer items-center gap-2 text-sm text-(--main)"
+                        className="flex min-h-5 cursor-pointer items-center gap-2 text-sm text-main"
                         key={value}
                       >
                         <input
                           checked={draftFilters[key] === value}
-                          className="size-4 accent-(--main)"
+                          className="size-4 accent-main"
                           name={key}
                           onChange={() => handleSelection(key, value)}
                           type="radio"
@@ -177,20 +180,19 @@ export default function FilterPanel({
         </div>
 
         <div className="flex flex-col gap-3">
-          <button
-            className="h-10 w-full rounded-full bg-(--grey-green) px-6 text-sm font-medium text-white transition hover:bg-(--green-hover) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--grey-green)"
-            type="submit"
-          >
+          <Button className="w-full" size="sm" type="submit">
             Search
-          </button>
-          <button
-            className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-full border border-(--gray-light) bg-white px-5 text-sm font-medium text-(--main) transition hover:border-(--grey-green)"
+          </Button>
+          <Button
+            className="w-full px-5"
             onClick={handleClear}
+            size="sm"
             type="button"
+            variant="outline"
           >
             <FiX aria-hidden="true" />
             Clear filters
-          </button>
+          </Button>
         </div>
       </form>
     </aside>
