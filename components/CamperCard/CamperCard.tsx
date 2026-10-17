@@ -1,12 +1,7 @@
 import Image from "next/image";
-import {
-  FiDroplet,
-  FiMapPin,
-  FiSettings,
-  FiStar,
-  FiTruck,
-} from "react-icons/fi";
+import { FiDroplet, FiMapPin, FiSettings, FiTruck } from "react-icons/fi";
 import { formatCamperForm } from "@/lib/formatters";
+import StarRating from "@/components/StarRating/StarRating";
 import type { CamperListItem } from "@/types/camper";
 import { ButtonLink } from "@/components/ui/Button/Button";
 
@@ -53,7 +48,7 @@ export default function CamperCard({ camper }: { camper: CamperListItem }) {
 
         <div className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-text">
           <span className="inline-flex items-center gap-1">
-            <FiStar aria-hidden="true" className="text-rating" />
+            <StarRating value={camper.rating} />
             <span>
               {rating} ({camper.totalReviews} Reviews)
             </span>

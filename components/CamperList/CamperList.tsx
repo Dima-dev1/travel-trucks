@@ -5,8 +5,9 @@ import { FiX } from "react-icons/fi";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import type { CamperListResponse } from "@/types/camper";
 import { Button } from "@/components/ui/Button/Button";
-import CamperCard from "./CamperCard";
+import CamperCard from "@/components/CamperCard/CamperCard";
 import type { InfiniteData } from "@tanstack/react-query";
+import Loader from "@/components/Loader/Loader";
 
 export default function CamperList({
   isPlaceholderData,
@@ -23,11 +24,7 @@ export default function CamperList({
         aria-label="Camper search results"
         className="flex min-h-96 flex-1 flex-col items-center justify-center gap-3"
       >
-        <div
-          aria-label="Loading campers"
-          className="size-10 animate-spin rounded-full border-4 border-gray-light border-t-grey-green"
-          role="status"
-        />
+        <Loader label="Loading campers" size="lg" />
         <p className="text-sm text-text">Loading campers...</p>
       </section>
     );
@@ -152,11 +149,7 @@ export default function CamperList({
           >
             {query.isFetchingNextPage ? (
               <span className="inline-flex items-center gap-2">
-                <span
-                  aria-label="Loading campers"
-                  className="size-4 animate-spin rounded-full border-2 border-gray-light border-t-grey-green"
-                  role="status"
-                />
+                <Loader label="Loading campers" size="sm" />
                 Loading campers...
               </span>
             ) : (
@@ -181,10 +174,7 @@ function PlaceholderSpinner() {
       className="absolute top-4 right-4 z-10 rounded-full bg-white p-2 shadow"
       role="status"
     >
-      <span
-        aria-hidden="true"
-        className="block size-5 animate-spin rounded-full border-2 border-gray-light border-t-grey-green"
-      />
+      <Loader size="md" />
     </div>
   );
 }
