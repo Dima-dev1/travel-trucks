@@ -1,49 +1,66 @@
 # TravelTrucks
 
-TravelTrucks is a camper-rental frontend project built with Next.js App Router,
-TypeScript, and Tailwind CSS. It will use the GoIT Campers API for camper
-listings, filters, reviews, details, and booking requests.
+TravelTrucks is a camper-rental web application. Users can browse available campers, filter them, open a detailed page with a photo gallery and reviews, and send a booking request.
 
-## Requirements
+**Live demo:** https://travel-trucks-eight-iota.vercel.app/
 
-- Node.js 20 or newer
-- npm
+## Features
+
+- Home page with a banner and a **View Now** call to action
+- Catalog of campers loaded from the backend
+- Backend filtering by location, camper form, engine and transmission (one option per group)
+- **Load More** pagination (4 cards per request) that respects the active filters
+- Camper details page opened in a new tab, with full information, a Swiper thumbnail gallery and five-star user reviews
+- Booking form with validation and a success notification
+- Loading, error and empty states for every request
+- Per-page metadata and Open Graph tags
+
+## Tech stack
+
+- Next.js (App Router) and React
+- TypeScript
+- Tailwind CSS
+- TanStack Query (`useInfiniteQuery`)
+- Axios
+- Formik and Yup
+- Swiper
+- React Hot Toast
+- React Icons
+- ESLint and Prettier
+
+Backend: [Campers API](https://campers-api.goit.study/docs)
 
 ## Getting started
 
+Requirements: Node.js 20 or newer and npm.
+
 ```bash
+git clone https://github.com/Dima-dev1/travel-trucks.git
+cd travel-trucks
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000). No environment variables are needed.
 
-## Available scripts
+## Scripts
 
 ```bash
-npm run dev    # Start the development server
-npm run lint   # Run ESLint
-npm run build  # Create a production build
-npm start      # Serve the production build
+npm run dev           # development server
+npm run build         # production build
+npm start             # serve the production build
+npm run lint          # ESLint
+npm run typecheck     # TypeScript check
+npm run format        # format with Prettier
+npm run format:check  # check formatting
 ```
 
-## Technology
+## Project structure
 
-- Next.js App Router and React
-- TypeScript
-- Tailwind CSS
-- TanStack Query for API state and catalog pagination
-- React Hook Form and Zod for booking form validation
-- Swiper for the camper image gallery
-
-The API documentation is available at
-[campers-api.goit.study/docs](https://campers-api.goit.study/docs).
-
-## Project status
-
-The Next.js and Tailwind foundation is installed. The required application
-routes and features are the next implementation step:
-
-- `/` — home page
-- `/catalog` — camper catalog and filters
-- `/catalog/[camperId]` — camper details, reviews, gallery, and booking
+```
+app/          routes, layouts, metadata
+components/   UI grouped by feature (Catalog, CamperDetails, Header, Hero, ui)
+services/     API client and request functions
+lib/          small helpers
+types/        TypeScript types
+```
