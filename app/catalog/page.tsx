@@ -3,6 +3,7 @@ import CatalogClient from "@/components/CatalogClient/CatalogClient";
 import { buildSocialMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/catalog" },
   title: "Camper Catalog",
   description: "Browse and filter available camper vans for your next trip.",
   ...buildSocialMetadata({

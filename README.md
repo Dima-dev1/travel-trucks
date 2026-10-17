@@ -63,3 +63,7 @@ components/   one folder per component (Header, Hero, CamperCard, Filters, Booki
 lib/          API client, formatters, amenity data
 types/        TypeScript types
 ```
+
+## Author
+
+[Your name] — [@Dima-dev1](https://github.com/Dima-dev1)

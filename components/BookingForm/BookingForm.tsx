@@ -47,9 +47,15 @@ export default function BookingForm({ camperId }: { camperId: string }) {
 
   const sendBooking = (
     values: BookingValues,
-    { resetForm }: { resetForm: () => void },
+    {
+      resetForm,
+      setSubmitting,
+    }: { resetForm: () => void; setSubmitting: (value: boolean) => void },
   ) => {
-    bookingMutation.mutate(values, { onSuccess: resetForm });
+    bookingMutation.mutate(values, {
+      onSuccess: () => resetForm(),
+      onSettled: () => setSubmitting(false),
+    });
   };
 
   return (
@@ -99,6 +105,7 @@ export default function BookingForm({ camperId }: { camperId: string }) {
                 onBlur={handleBlur}
                 onChange={handleChange}
                 placeholder="Name*"
+                type="text"
                 value={values.name}
               />
               {touched.name && errors.name && (
@@ -152,7 +159,7 @@ export default function BookingForm({ camperId }: { camperId: string }) {
 
             <Button
               className="mt-1"
-              disabled={isSubmitting || bookingMutation.isPending}
+              disabled={isSubmitting}
               size="md"
               type="submit"
             >

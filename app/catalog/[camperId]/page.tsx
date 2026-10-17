@@ -34,6 +34,7 @@ export async function generateMetadata({
     return {
       title: camper.name,
       description: metaDescription,
+      alternates: { canonical: `/catalog/${camperId}` },
       ...buildSocialMetadata({
         title: camper.name,
         description: metaDescription,
