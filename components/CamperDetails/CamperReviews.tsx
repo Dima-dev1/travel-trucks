@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { FiStar } from "react-icons/fi";
-import { getCamperReviews } from "@/lib/api";
+import { getCamperReviews } from "@/services/api";
 import type { CamperReview } from "@/types/camper";
 
 export default function CamperReviews({
