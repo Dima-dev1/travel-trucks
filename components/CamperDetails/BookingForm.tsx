@@ -3,9 +3,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { Formik, type FormikErrors } from "formik";
 import { FiAlertCircle } from "react-icons/fi";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { z } from "zod";
-import { createBookingRequest } from "@/lib/api";
+import { createBookingRequest } from "@/services/api";
 
 const bookingSchema = z.object({
   name: z
@@ -49,19 +49,19 @@ export default function BookingForm({ camperId }: { camperId: string }) {
         name: values.name.trim(),
         email: values.email.trim(),
       }),
+    onSuccess: (response) => {
+      toast.success(response.message || "Your booking request was sent.");
+    },
+    onError: () => {
+      toast.error("Could not send the booking request. Please try again.");
+    },
   });
 
-  const sendBooking = async (
+  const sendBooking = (
     values: BookingValues,
     { resetForm }: { resetForm: () => void },
   ) => {
-    try {
-      const response = await bookingMutation.mutateAsync(values);
-      toast.success(response.message || "Your booking request was sent.");
-      resetForm();
-    } catch {
-      toast.error("Could not send the booking request. Please try again.");
-    }
+    bookingMutation.mutate(values, { onSuccess: resetForm });
   };
 
   return (

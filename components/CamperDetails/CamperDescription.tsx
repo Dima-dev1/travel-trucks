@@ -1,5 +1,8 @@
 import { FiDroplet, FiMapPin, FiSettings, FiStar } from "react-icons/fi";
-import type { Amenity, CamperDetails as CamperDetailsType } from "@/types/camper";
+import type {
+  Amenity,
+  CamperDetails as CamperDetailsType,
+} from "@/types/camper";
 
 const amenityLabels: Record<Amenity, string> = {
   ac: "AC",
@@ -71,10 +74,7 @@ export default function CamperDescription({
 
       <section className="rounded-2xl bg-(--inputs) p-6">
         <h2 className="text-xl font-semibold text-(--main)">Vehicle details</h2>
-        <ul
-          aria-label="Vehicle features"
-          className="mt-4 flex flex-wrap gap-2"
-        >
+        <ul aria-label="Vehicle features" className="mt-4 flex flex-wrap gap-2">
           {badges.map(({ icon: Icon, label }) => (
             <li
               className="inline-flex min-h-10 items-center gap-2 rounded-full bg-(--badges) px-3 text-sm font-medium text-(--main)"

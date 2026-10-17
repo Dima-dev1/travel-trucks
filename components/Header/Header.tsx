@@ -26,14 +26,11 @@ export default function Header() {
               aria-label="Main navigation"
               className="absolute left-1/2 flex -translate-x-1/2 items-center gap-8"
             >
-              <Link
-                className="text-base font-medium text-main"
-                href="/"
-              >
+              <Link className="text-base font-medium text-(--main)" href="/">
                 Home
               </Link>
               <Link
-                className="text-base font-medium text-main"
+                className="text-base font-medium text-(--main)"
                 href="/catalog"
                 prefetch={false}
               >
