@@ -66,4 +66,4 @@ types/        TypeScript types
 
 ## Author
 
-[Your name] — [@Dima-dev1](https://github.com/Dima-dev1)
+[Dima] — [@Dima-dev1](https://github.com/Dima-dev1)
