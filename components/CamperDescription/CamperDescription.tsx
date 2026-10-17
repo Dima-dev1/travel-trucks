@@ -1,21 +1,7 @@
-import { FiDroplet, FiMapPin, FiSettings } from "react-icons/fi";
+import { BsCarFront, BsDiagram3, BsFuelPump, BsMap } from "react-icons/bs";
 import StarRating from "@/components/StarRating/StarRating";
-import type {
-  Amenity,
-  CamperDetails as CamperDetailsType,
-} from "@/types/camper";
-
-const amenityLabels: Record<Amenity, string> = {
-  ac: "AC",
-  bathroom: "Bathroom",
-  kitchen: "Kitchen",
-  tv: "TV",
-  radio: "Radio",
-  refrigerator: "Refrigerator",
-  microwave: "Microwave",
-  gas: "Gas",
-  water: "Water",
-};
+import { amenities } from "@/lib/amenities";
+import type { CamperDetails as CamperDetailsType } from "@/types/camper";
 
 const formatLabel = (value: string) =>
   value
@@ -34,13 +20,12 @@ export default function CamperDescription({
     .reverse()
     .join(", ");
   const badges = [
-    { label: formatLabel(camper.transmission), icon: FiSettings },
-    { label: formatLabel(camper.engine), icon: FiDroplet },
+    { label: formatLabel(camper.transmission), icon: BsDiagram3 },
+    { label: formatLabel(camper.engine), icon: BsFuelPump },
     ...camper.amenities.map((amenity) => ({
-      label: amenityLabels[amenity],
-      icon: null,
+      ...amenities[amenity],
     })),
-    { label: formatLabel(camper.form), icon: null },
+    { label: formatLabel(camper.form), icon: BsCarFront },
   ];
   const specs = [
     ["Form", formatLabel(camper.form)],
@@ -61,7 +46,7 @@ export default function CamperDescription({
             {camper.rating.toFixed(1)} ({camper.totalReviews} Reviews)
           </span>
           <span className="inline-flex items-center gap-1">
-            <FiMapPin aria-hidden="true" />
+            <BsMap aria-hidden="true" />
             {location}
           </span>
         </div>
