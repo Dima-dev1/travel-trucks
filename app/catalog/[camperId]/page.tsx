@@ -7,6 +7,7 @@ import CamperGallery from "@/components/CamperGallery/CamperGallery";
 import CamperReviews from "@/components/CamperReviews/CamperReviews";
 import BookingForm from "@/components/BookingForm/BookingForm";
 import { getCamperById, getCamperReviews } from "@/lib/api";
+import { buildSocialMetadata } from "@/lib/metadata";
 
 type CamperPageProps = {
   params: Promise<{ camperId: string }>;
@@ -33,14 +34,12 @@ export async function generateMetadata({
     return {
       title: camper.name,
       description: metaDescription,
-      openGraph: {
-        type: "website",
-        siteName: "TravelTrucks",
-        locale: "en_US",
+      ...buildSocialMetadata({
         title: camper.name,
         description: metaDescription,
-        images: [camper.gallery[0]?.original || "/og-image.png"],
-      },
+        image: camper.gallery[0]?.original,
+        cardTitle: camper.name,
+      }),
     };
   } catch (error) {
     if (isNotFoundError(error)) {
