@@ -1,47 +1,34 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import { Formik, type FormikErrors } from "formik";
+import { Formik } from "formik";
 import { FiAlertCircle } from "react-icons/fi";
 import toast from "react-hot-toast";
-import { z } from "zod";
+import * as Yup from "yup";
 import { createBookingRequest } from "@/services/api";
 import { Button } from "@/components/ui/Button/Button";
 
-const bookingSchema = z.object({
-  name: z
-    .string()
+const bookingSchema = Yup.object({
+  name: Yup.string()
     .trim()
+    .required("Please enter your full name.")
     .min(2, "Please enter your full name.")
-    .regex(
+    .matches(
       /^[\p{L}]+(?:[ '\u2019-][\p{L}]+)*$/u,
       "Please enter your full name using letters only.",
     ),
-  email: z.string().trim().email("Please enter a valid email address."),
+  email: Yup.string()
+    .trim()
+    .required("Please enter a valid email address.")
+    .email("Please enter a valid email address."),
 });
 
-type BookingValues = z.infer<typeof bookingSchema>;
+type BookingValues = Yup.InferType<typeof bookingSchema>;
 
 const initialValues: BookingValues = {
   name: "",
   email: "",
 };
-
-function validateBooking(values: BookingValues): FormikErrors<BookingValues> {
-  const result = bookingSchema.safeParse(values);
-  if (result.success) return {};
-
-  return result.error.issues.reduce<FormikErrors<BookingValues>>(
-    (errors, issue) => {
-      const field = issue.path[0];
-      if ((field === "name" || field === "email") && !errors[field]) {
-        errors[field] = issue.message;
-      }
-      return errors;
-    },
-    {},
-  );
-}
 
 export default function BookingForm({ camperId }: { camperId: string }) {
   const bookingMutation = useMutation({
@@ -76,7 +63,7 @@ export default function BookingForm({ camperId }: { camperId: string }) {
       <Formik
         initialValues={initialValues}
         onSubmit={sendBooking}
-        validate={validateBooking}
+        validationSchema={bookingSchema}
       >
         {({
           errors,
