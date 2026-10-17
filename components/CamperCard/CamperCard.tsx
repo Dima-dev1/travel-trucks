@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FiDroplet, FiMapPin, FiSettings, FiTruck } from "react-icons/fi";
+import { BsCarFront, BsDiagram3, BsFuelPump, BsMap } from "react-icons/bs";
 import { formatCamperForm } from "@/lib/formatters";
 import StarRating from "@/components/StarRating/StarRating";
 import type { CamperListItem } from "@/types/camper";
@@ -20,9 +20,9 @@ export default function CamperCard({ camper }: { camper: CamperListItem }) {
     .reverse()
     .join(", ");
   const features = [
-    { icon: FiDroplet, label: camper.engine },
-    { icon: FiSettings, label: camper.transmission },
-    { icon: FiTruck, label: formatCamperForm(camper.form) },
+    { icon: BsFuelPump, label: camper.engine },
+    { icon: BsDiagram3, label: camper.transmission },
+    { icon: BsCarFront, label: formatCamperForm(camper.form) },
   ];
 
   return (
@@ -54,7 +54,7 @@ export default function CamperCard({ camper }: { camper: CamperListItem }) {
             </span>
           </span>
           <span className="inline-flex items-center gap-1">
-            <FiMapPin aria-hidden="true" />
+            <BsMap aria-hidden="true" />
             {location}
           </span>
         </div>

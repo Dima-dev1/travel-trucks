@@ -2,7 +2,7 @@
 
 import { useMutation } from "@tanstack/react-query";
 import { Formik } from "formik";
-import { FiAlertCircle } from "react-icons/fi";
+import { BsExclamationCircle } from "react-icons/bs";
 import toast from "react-hot-toast";
 import * as Yup from "yup";
 import { createBookingRequest } from "@/lib/api";
@@ -102,7 +102,7 @@ export default function BookingForm({ camperId }: { camperId: string }) {
                 value={values.name}
               />
               {touched.name && errors.name && (
-                <FiAlertCircle
+                <BsExclamationCircle
                   aria-hidden="true"
                   className="absolute top-1/2 right-4 -translate-y-1/2 text-xl text-button"
                 />
@@ -138,7 +138,7 @@ export default function BookingForm({ camperId }: { camperId: string }) {
                 value={values.email}
               />
               {touched.email && errors.email && (
-                <FiAlertCircle
+                <BsExclamationCircle
                   aria-hidden="true"
                   className="absolute top-1/2 right-4 -translate-y-1/2 text-xl text-button"
                 />

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { FiX } from "react-icons/fi";
+import { BsXLg } from "react-icons/bs";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import type { CamperListResponse } from "@/types/camper";
 import { Button } from "@/components/ui/Button/Button";
@@ -85,7 +85,7 @@ export default function CamperList({
               type="button"
               variant="outline"
             >
-              <FiX aria-hidden="true" />
+              <BsXLg aria-hidden="true" />
               Clear filters
             </Button>
             <Button
