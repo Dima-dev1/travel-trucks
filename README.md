@@ -59,8 +59,7 @@ npm run format:check  # check formatting
 
 ```
 app/          routes, layouts, metadata
-components/   UI grouped by feature (Catalog, CamperDetails, Header, Hero, ui)
-services/     API client and request functions
-lib/          small helpers
+components/   one folder per component (Header, Hero, CamperCard, Filters, BookingForm, ui/Button, ...)
+lib/          API client, formatters, amenity data
 types/        TypeScript types
 ```
