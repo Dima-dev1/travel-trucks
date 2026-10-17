@@ -25,13 +25,22 @@ export async function generateMetadata({
   try {
     const camper = await getCamper(camperId);
     const description = camper.description.replace(/\s+/g, " ").trim();
+    const metaDescription =
+      description.length > 160
+        ? `${description.slice(0, 157).trimEnd()}...`
+        : description;
 
     return {
       title: camper.name,
-      description:
-        description.length > 160
-          ? `${description.slice(0, 157).trimEnd()}...`
-          : description,
+      description: metaDescription,
+      openGraph: {
+        type: "website",
+        siteName: "TravelTrucks",
+        locale: "en_US",
+        title: camper.name,
+        description: metaDescription,
+        images: [camper.gallery[0]?.original || "/og-image.png"],
+      },
     };
   } catch (error) {
     if (isNotFoundError(error)) {

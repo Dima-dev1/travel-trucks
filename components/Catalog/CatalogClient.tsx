@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { getCampers } from "@/services/api";
 import type { CamperSearchParams } from "@/types/camper";
 import CamperList from "./CamperList";
@@ -23,6 +23,7 @@ export default function CatalogClient() {
     queryFn: ({ pageParam, signal }) =>
       getCampers({ page: pageParam, perPage: PAGE_SIZE, ...filters }, signal),
     initialPageParam: 1,
+    placeholderData: keepPreviousData,
     getNextPageParam: (lastPage) =>
       lastPage.page < lastPage.totalPages ? lastPage.page + 1 : undefined,
   });
@@ -42,7 +43,11 @@ export default function CatalogClient() {
           onSearch={setFilters}
           onClear={clearFilters}
         />
-        <CamperList query={campersQuery} onClearFilters={clearFilters} />
+        <CamperList
+          isPlaceholderData={campersQuery.isPlaceholderData}
+          query={campersQuery}
+          onClearFilters={clearFilters}
+        />
       </div>
     </>
   );
